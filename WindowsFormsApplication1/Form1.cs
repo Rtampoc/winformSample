@@ -63,7 +63,7 @@ namespace WindowsFormsApplication1
                 }
                 else
                 {
-                    cmd = new SqlCommand("INSERT INTO tblData (BadgNo, FirstName, LastName, Birthday, Gender) VALUES (@BadgNo, @FirstName, @LastName, @Birthday, @Gender)", conn);
+                    cmd = new SqlCommand("INSERT INTO tblData (BadgNo) VALUES (@BadgNo)", conn);
                 }
 
                 cmd.Parameters.AddWithValue("@BadgNo", badge);
@@ -84,6 +84,8 @@ namespace WindowsFormsApplication1
                 {
                     cmd.ExecuteNonQuery();
                     MessageBox.Show(isUpdating ? "BadgeNo updated successfully!" : "BadgeNo added successfully!");
+                    clearFields();
+                    btnEdit.Enabled = false;
                     LoadData();
                     btnAccept.Enabled = false;
                     //btnAccept.Text = "Add";
@@ -165,6 +167,14 @@ namespace WindowsFormsApplication1
             txtLname.Enabled = true;
             dateTimePicker1.Enabled = true;
             cmbxGender.Enabled = true;
+        }
+        private void clearFields()
+        {
+            cmbxBadge.Text = "";
+            txtFname.Text = "";
+            txtLname.Text = "";
+            dateTimePicker1.Text = "";
+            cmbxGender.Text = "";
         }
 
         private void SetAcceptButtonState()
